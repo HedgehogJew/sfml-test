@@ -1,10 +1,22 @@
 #include <SFML/Graphics.hpp>
 
+#include "geometry.cpp"
+#include "const.hpp"
+
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(600, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    sf::RenderWindow window(sf::VideoMode(windowSizeX, windowSizeY), "Two dots field");
+    sf::CircleShape r1(10);
+    //r1.setFillColor(sf::Color::Green);
+
+    //r1.setPosition(coordComp(-200,200));
+
+    
+    sf::CircleShape dot (3);
+    dot.setFillColor(sf::Color::White);
+
+
+ 
 
     while (window.isOpen())
     {
@@ -15,9 +27,26 @@ int main()
                 window.close();
         }
 
+           for(int i = -300; i < 300; i++)
+    {
+        for(int j = -300; j < 300; j++)
+        {
+            if((abs(i) < 100) && (abs(j) < 100))
+            {
+                dot.setPosition(coordComp(i,j));
+                window.draw(r1);
+            }
+        }
+
+    }
+
+
         window.clear();
-        window.draw(shape);
+     //   window.draw(r1);
         window.display();
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){window.close();}
+        
+        
     }
 
     return 0;
